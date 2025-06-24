@@ -1,4 +1,4 @@
-/* the main colour scheme */
+/* --- CSS VARIABLES (THEME) --- */
 :root {
     --primary-color: #007BFF;
     /* A nice blue */
@@ -10,7 +10,6 @@
     --border-color: #EAEAEA;
     --sidebar-width: 250px;
     --mobile-header-height: 70px;
-    /* Increased height slightly */
 }
 
 /* --- BASE & RESET --- */
@@ -62,6 +61,7 @@ section {
     flex-direction: column;
     padding: 2rem 0;
     transition: left 0.3s ease;
+    z-index: 150;
 }
 
 .sidebar-header {
@@ -111,7 +111,6 @@ section {
 .sidebar-nav a i {
     font-size: 1.2rem;
     width: 30px;
-    /* Aligns icons neatly */
     margin-right: 15px;
 }
 
@@ -131,11 +130,9 @@ section {
     color: var(--primary-color);
 }
 
-
 /* --- MOBILE HEADER (DYNAMIC) --- */
 .mobile-header {
     display: none;
-    /* Hidden on desktop */
     position: fixed;
     top: 0;
     left: 0;
@@ -146,7 +143,6 @@ section {
     padding: 0 20px;
     z-index: 100;
     background-color: transparent;
-    /* Initially transparent */
     transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -176,16 +172,15 @@ section {
 }
 
 /* --- HERO SECTION --- */
-#home {
-    background-color: var(--surface-color);
-}
-
-.hero {
+#home.hero {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    background-color: var(--surface-color);
+    padding: 0 20px;
+    /* Padding for mobile */
 }
 
 .hero-content h2 {
@@ -320,54 +315,190 @@ section {
 }
 
 
+/* --- ACHIEVEMENTS SECTION (Index Page) --- */
+#achievements {
+    background-color: var(--surface-color);
+    /* Different background to stand out */
+    padding: 80px 0;
+    text-align: center;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.achievement-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.achievement-card {
+    background-color: var(--surface-color);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.achievement-link:hover .achievement-card {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.achievement-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.achievement-card h3 {
+    color: var(--heading-color);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.achievement-card p {
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+#achievements .call-to-action {
+    margin-top: 40px;
+}
+
+#achievements .call-to-action p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: var(--surface-color);
+}
+
+
+/* --- ACHIEVEMENT DETAIL PAGE --- */
+#achievement-detail {
+    padding-top: 60px;
+}
+
+.achievement-title {
+    font-size: 3rem;
+    color: var(--heading-color);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.achievement-meta {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 40px;
+}
+
+.achievement-meta i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+.achievement-body h2 {
+    font-size: 2rem;
+    color: var(--heading-color);
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.achievement-body p,
+.achievement-body li {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.achievement-body ul {
+    list-style-position: inside;
+    padding-left: 20px;
+}
+
+.achievement-image {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.back-link-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.back-link-container .btn i {
+    margin-right: 10px;
+}
+
 /* --- FOOTER --- */
 .main-footer {
     padding: 2rem 0;
     text-align: center;
     font-size: 0.9rem;
     color: #999;
+    border: none;
 }
 
 
 /* --- RESPONSIVE DESIGN (Media Queries) --- */
 @media (max-width: 992px) {
-    :root {
-        --sidebar-width: 0;
+    .main-content {
+        margin-left: 0;
     }
 
     .sidebar {
         left: -300px;
-        /* Hide sidebar off-screen */
-        z-index: 200;
-        box-shadow: 10px 0px 40px rgba(0, 0, 0, 0.1);
     }
 
     .sidebar.active {
         left: 0;
-        /* Show sidebar */
-    }
-
-    .main-content {
-        margin-left: 0;
     }
 
     .mobile-header {
         display: flex;
     }
 
-    /* Adjust section padding to account for fixed mobile header */
     section {
         padding-top: 100px;
     }
 
-    #home {
-        /* No top padding for home, it's the hero section */
+    #home.hero,
+    #achievement-detail {
         padding-top: 0;
     }
 
     .about-content {
         flex-direction: column;
         text-align: center;
+    }
+
+    .achievement-title {
+        font-size: 2.5rem;
     }
 }
 
@@ -376,7 +507,43 @@ section {
         font-size: 2.2rem;
     }
 
-    .section-title {
+    .section-title,
+    .achievement-body h2 {
         font-size: 2rem;
     }
+
+    /* --- BUTTON STYLES (UPDATED FOR SMOOTHNESS) --- */
+    .btn {
+        display: inline-block;
+        padding: 14px 28px;
+        /* Slightly larger padding */
+        border-radius: 8px;
+        /* Slightly more rounded corners */
+        text-decoration: none;
+        font-weight: 600;
+        /* Bold text */
+        color: #fff;
+        background-image: linear-gradient(45deg, #007BFF, #00A2FF);
+        /* Subtle gradient */
+        border: none;
+        /* Remove border */
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        /* Soft initial shadow */
+
+        /* The key to smoothness: transition all properties */
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .btn:hover {
+        /* Lift the button up and increase shadow on hover */
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+    }
+
+    .btn:active {
+        /* Make the button look like it's being pressed down */
+        transform: translateY(1px);
+        box-shadow: 0 2px 10px rgba(0, 123, 255, 0.2);
+    }
+
 }
